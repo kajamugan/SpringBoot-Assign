@@ -3,6 +3,7 @@ package com.kaja.DefectTracker.entities;
 import java.io.Serializable;
 import java.util.List;
 
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+
 
 @Entity
 @Table(name = "employee")
@@ -25,6 +31,7 @@ public class Employee implements Serializable {
 	@Column(name = "id", updatable = false, nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	@JsonProperty(access = Access.WRITE_ONLY)
 	@ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
 	private List<Modules> module;
 	private String name, nic, dateofbrith, address;
